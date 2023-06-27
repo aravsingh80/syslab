@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bodies</title>
+	<link rel="stylesheet" href="/
+	css/planet.css">
+</head>
+<body>
+<video autoplay muted loop id="myVideo">
+  <source src="img/spacevideo.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+<div id = "yuh">
+  <h1>
+    Select A Body
+</h1>
+<form action="/navigationsystem" method="POST">
+    <input type="radio" id="moon" name="planet" value="Moon">
+<label for="moon">Moon</label><br>
+<input type="radio" id="mars" name="planet" value="Mars">
+<label for="mars">Mars</label><br>
+<input type="radio" id="mercury" name="planet" value="Mercury">
+<label for="mercury">Mercury</label><br>
+  <input type="radio" id="venus" name="planet" value="Venus">
+<label for="venus">Pluto</label>
+  <p id = "nokizzy">{{error}}</p>
+    <button type = "submit">
+        Submit
+    </button>
+</form>
+</div>
+</body>
+</html>

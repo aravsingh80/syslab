@@ -1,0 +1,147 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+  font-size: 17px;
+}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
+
+input{
+  margin: 7px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+label:hover
+{
+  font-weight: bold;
+}
+
+#yee
+{
+    color:grey;
+}
+
+#nokizzy
+{
+    color:red;
+}
+
+p
+{
+    text-align: center;
+}
+
+#yuh
+{
+  /*margin-left: 425px;*/
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid;
+  width: 450px;
+  height: 420px;
+  margin-top: 80px;
+  box-shadow: 5px 10px #0d0163;
+  left: 35%;
+  background-color: white;
+  position: fixed;
+  padding: 20px;
+  -webkit-animation: fadeinout 4s linear forwards;
+    animation: fadeinout 4s linear forwards;
+    opacity: 0;
+}
+
+#moon
+{
+    margin-top: 160px;
+    margin-left: 150px;
+    left: 50%;
+}
+#mars
+{
+    margin-left: 150px;
+}
+#mercury
+{
+    margin-left: 150px;
+}
+#venus
+{
+    margin-left: 150px;
+}
+
+h1
+{
+    font-family: Helvetica;
+    color: #500066;
+    transition-duration: 0.4s;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  border-radius: 30px;
+  position: absolute;
+	left: 50%;
+	transform: translate(-50%, -50%);
+  -webkit-animation: fadeinout 4s linear forwards;
+    animation: fadeinout 4s linear forwards;
+    opacity: 0;
+}
+
+button
+{
+  transition-duration: 0.4s;
+  background-color: purple;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  border-radius: 30px;
+  position: absolute;
+	left: 50%;
+	transform: translate(-50%, -50%);
+  -webkit-animation: fadeinout 4s linear forwards;
+    animation: fadeinout 4s linear forwards;
+    opacity: 0;
+}
+button:hover {
+  background-color: black; 
+  color: white;
+}
+.elementToFadeInAndOut {
+    width:200px;
+    height: 200px;
+    background: red;
+    -webkit-animation: fadeinout 4s linear forwards;
+    animation: fadeinout 4s linear forwards;
+    opacity: 0;
+}
+
+@-webkit-keyframes fadeinout {
+  100% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+  100% { opacity: 1; }
+}

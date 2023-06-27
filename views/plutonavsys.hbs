@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Navigation</title>
+	<link rel="stylesheet" href="/
+	css/moonnav.css">
+   <link href='https://fonts.googleapis.com/css?family=Allan' rel='stylesheet'>
+<style>
+body
+  {
+    background-image: url("img/newpluto1.png");
+    background-color: black;
+    background-size: contain;
+    background-position: center;
+  background-repeat: no-repeat;
+/*   position: relative; */
+  }
+#title {
+ font-family: 'Allan';
+  background-color: white;
+}
+  #inputform, #secDiv2
+  {
+    background-color: white;
+  }
+  </style>
+</head>
+<body onload = 'drawbackground(drawDots, {{coords}}, 2, "1")' id = "b">
+   <div class="hero">
+<!--           <h3>NAME</h3> -->
+            <nav>
+              
+                <ul>
+									
+                  <h1 id = "title">Pluto</h1>
+                  <b style="background:black; color:white; padding:1px 4px">Starting Point</b>&nbsp;
+<b style="background:blue; color:white; padding:1px 4px">Features</b>&nbsp;
+<b style="background:purple; color:white; padding:1px 4px">Ending Point</b>&nbsp;
+<b style="background:yellow; color:white; padding:1px 4px">New Point</b><br><br>
+<!--                   <h2 id = "coords">x:<br>y:</h2> -->
+                  <a><button id = 'side' href="javascript:void(0);" onclick = 'switchSides()'  accesskey = 'v'>View 1</button></a>&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;
+                    <a href="planchoice"><button class="button2">Home</button></a>&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;
+                    <div class = "dropdown">
+                      <a><button class="button2">Planets</button></a>
+                      <div class = "dropdown-content">
+                        <a rel = "noopener" target="_self" href="moon">Moon</a><br>
+                        <a rel = "noopener" target="_self" href="mars">Mars</a><br>
+                        <a rel="noopener" target="_self" href="mercury">Mercury</a><br>
+                        <a rel="noopener" target="_self" href="pluto">Pluto</a><br>
+                      </div>
+                    </div>
+<!--                     <a href="#about"><button class="button2">About</button></a>
+                    <a href="#contact"><button class="button2">Contact</button></a>
+                    <a href="login"><button class="button1">Login</button></a>&nbsp; -->
+<!--                 </ul> 
+            </nav> -->
+        </div>
+<!--   <h1 id = "title">Pluto</h1> -->
+  <div id = "firstDiv2">
+  <div id = "secDiv2">
+
+      <h1 id = "featurepick">Add/Delete a Feature</h1>
+      <br>
+    <form action = "/addFeature" method = "POST">
+      <input type = 'text' name = "newFeature" id = 'newFeature' placeholder="Feature Name" required>
+      <br>
+      <br>
+      <input type="number" step="0.01" name = "newFeature2" id = "newFeature2" placeholder = "X-coordinate" required>
+      <input type="number" step="0.01" name = "newFeature3" id = "newFeature3" placeholder = "Y-coordinate" required>
+<!--       <input type = 'text' name = "newFeature2" id = 'newFeature2' placeholder = 'Coordinates (Format: "[x, y]")'> -->
+      <br><br>
+            <button type = "submit" id = "featureAdder">Add</button>
+      <input type = "hidden" name = "planet" id = "planet" value = "Pluto"></input>
+    </form>
+<!--       <input type = "hidden" name = "planet" id = "planet" value = "Pluto"></input>
+      <datalist id="firstfeature">
+        {{{data2}}}
+      </datalist> -->
+    <form action = "/avoidFeature" method = "POST">
+    <br>
+      <br>
+<!--       <input list = 'firstfeature' name = "newFeature" id = 'newFeature' placeholder = "Feature To Be Removed">
+      <datalist id="firstfeature">
+        {{{data2}}}
+      </datalist> -->
+      <select name = "newFeature" id = "newFeature" placeholder = "Feature To Be Removed">{{{data2}}}</select>
+      <br>
+      <br>
+      <button type = "submit" id = "featureDeleter">Delete</button>
+      <input type = "hidden" name = "planet" id = "planet" value = "Pluto"></input>
+    </form>
+  </div>
+</div>
+<!-- <div id = "firstDiv">
+  <div id = "secDiv"> -->
+     <form action = "/inputcollect" method = "POST" id = "inputform">
+       <h1 id = "featurepick">Pick a feature</h1>
+      <br>
+      <select name = "input1" id = "input1">{{{data2}}}</select>
+      <br>
+      <br>
+<!--       <input list = 'firstfeature' name = "input2" id = 'input2'> -->
+<!--        <input type = "hidden" name = "planet" id = "planet" value = "Pluto"></input>
+      <datalist id="firstfeature">
+        {{{data2}}}
+      </datalist> -->
+       <select name = "input2" id = "input2">{{{data2}}}</select>
+      <br>
+      <br>
+      <button type = "submit" id = "subButton">Enter</button> 
+       <h3 id ="error">{{error}}</h3>
+       <input type = "hidden" name = "planet" id = "planet" value = "Pluto"></input>
+    </form>
+<!--   </div>
+</div> -->
+<!--   <button id = 'side' href="javascript:void(0);" onclick = 'switchSides()'>Side A</button> -->
+  <canvas id="canvas" width="1500" height="2500"></canvas>
+  <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+<!--     <span class="close">&times;</span> -->
+    <p id = "modaltext">Some text in the Modal..</p>
+  </div>
+
+</div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    //var span = document.getElementsByClassName("close")[0];
+    var modal = document.getElementById("myModal");
+//     span.onclick = function() {
+//   modal.style.display = "none";
+// }
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+    var rects = [];
+    var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+    canvas.onclick = function(e) {
+  if (e.target == modal) {
+    modal.style.display = "none";
+  }
+       var rect = this.getBoundingClientRect(),
+      x = e.clientX - rect.left,
+      y = e.clientY - rect.top,
+    
+      i = 0, r;
+      var textField = document.getElementById("newFeature"); 
+      var fieldValue = textField.value.trim();
+      if(!(fieldValue === ""))
+      {
+        console.log("hello")
+        var ajax_params = {
+              'url'     : "/addFeature",
+              'type'    : "POST",
+              'data'    : 
+              {
+                  'newFeature': fieldValue,
+                  'newFeature2': x,
+                  'newFeature3' : y,
+                  'planet' : document.getElementById("planet").value,
+                  'isajax' : 1
+              },
+              success: function(updatedData) {
+        window.location.reload(true);
+      }
+          };
+          // run AJAX function 
+          $.ajax(ajax_params);
+      }
+}
+  //  canvas.addEventListener('click', function(e) {
+  //     var rect = this.getBoundingClientRect(),
+  //     x = e.clientX - rect.left,
+  //     y = e.clientY - rect.top,
+  //     i = 0, r;
+   
+  // while(r = rects[i++]) {
+  //   ctx.beginPath();
+  //   ctx.rect(r.x, r.y, r.w, r.h);    
+    
+  //   // check if we hover it, fill red, if not fill it blue
+  //   if(ctx.isPointInPath(x, y))
+  //   {
+  //   var modal = document.getElementById("myModal");
+  //       modal.style.display = "block";
+  //       var finalS = r.name+"<br>"+"Coordinates: "+(x)+", "+(y)
+  //       document.getElementById("modaltext").innerHTML = finalS
+  //   }
+  // }
+  //  }, false);
+    canvas.onmousemove = function(e) {
+
+  // important: correct mouse position:
+  var rect = this.getBoundingClientRect(),
+      x = e.clientX - rect.left,
+      y = e.clientY - rect.top,
+      i = 0, r;
+  
+  ctx.clearRect(0, 0, canvas.width, canvas.height); // for demo
+   
+  while(r = rects[i++]) {
+    // add a single rect to path:
+    ctx.beginPath();
+    ctx.rect(r.x, r.y, r.w, r.h);    
+    if(ctx.isPointInPath(x, y))
+    {
+    var modal = document.getElementById("myModal");
+        modal.style.display = "block";
+        var x2 = parseInt(r.x/r.s)
+        var y2 = parseInt(r.y/r.s)
+        var finalS = r.name+"<br>"+"Coordinates: "+(x2)+", "+(y2)
+        document.getElementById("modaltext").innerHTML = finalS
+    }
+    // check if we hover it, fill red, if not fill it blue
+    ctx.fillStyle = ctx.isPointInPath(x, y) ? "white" : "blue";
+    ctx.fill();
+  }
+
+};
+    
+    var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+canvas.addEventListener("mousemove", function (evt) {
+    var pos = getMousePos(canvas, evt);
+      document.getElementById("coords").innerHTML = "x: "+pos.x+"<br>y: " + pos.y
+}, false);
+    dragElement(document.getElementById("firstDiv"));
+    dragElement(document.getElementById("firstDiv2"));
+     function getMousePos(canvas, evt)
+  {
+    var sc;
+    if(document.getElementById("side").innerHTML.includes('1'))
+    {
+      sc = 2
+    }
+    else if(document.getElementById("side").innerHTML.includes('2'))
+      {
+        sc = 3
+    }
+    else if(document.getElementById("side").innerHTML.includes('3'))
+      {
+        sc = -2
+    }
+    else if(document.getElementById("side").innerHTML.includes('4'))
+      {
+       sc = -1
+    }
+    else if(document.getElementById("side").innerHTML.includes('5'))
+      {
+       sc = 4
+    }
+    else
+      {
+       sc = 5
+    }
+    var rect = canvas.getBoundingClientRect();
+    console.log(evt.clientX)
+    return {
+      x: (evt.clientX - rect.left)/sc,
+      y: (evt.clientY - rect.top)/sc
+    };
+  }
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+    function simplify(str) {
+    var result = '', data = str.split('/'),
+        numOne = Number(data[0]),
+        numTwo = Number(data[1]);
+    for (var i = Math.max(numOne, numTwo); i > 1; i--) {
+    if ((numOne % i == 0) && (numTwo % i == 0)) {
+        numOne /= i;
+        numTwo /= i;
+    }
+    }
+    if (numTwo === 1) {
+    result = numOne.toString()
+    } else {
+    result = numOne.toString() + '/' + numTwo.toString()
+    }
+    return result
+}
+    function drawLine(startX, startY, endX, endY)
+{
+    console.log('coordinates')
+  console.log(startX)
+  console.log(startY)
+  console.log(endX)
+  console.log(endY)
+  const canvas = document.querySelector('#canvas');
+  if(!canvas.getContext){return;}
+  const ctx = canvas.getContext('2d');
+        ctx.lineWidth = 2;
+        ctx.font = "30px Arial";
+   let cameraOffset = { x: window.innerWidth/2, y: window.innerHeight/2 }
+let cameraZoom = 1
+let MAX_ZOOM = 5
+let MIN_ZOOM = 0.1
+let SCROLL_SENSITIVITY = 0.0005
+  canvas.width = window.innerWidth
+    canvas.height = window.innerHeight+500
+    
+    // Translate to the canvas centre before zooming - so you'll always zoom on what you're looking directly at
+    ctx.translate( window.innerWidth / 2, window.innerHeight / 2 )
+    ctx.scale(cameraZoom, cameraZoom)
+    ctx.translate( -window.innerWidth / 2 + cameraOffset.x, -window.innerHeight / 2 + cameraOffset.y )    
+        ctx.fillStyle = 'blue'
+        ctx.stroke()
+  var posX = startX;
+  var posY = startY;
+  endX = (startX+endX)/2
+  endY = (startY+endY)/2
+  numerator = endX-startX;
+  denominator = endY-startY;
+  var slopeX;
+  var slopeY;
+  if(numerator === 0 && denominator == 0)
+  {
+    slopeX = 0;
+    slopeY = 0;
+  }
+  else if(numerator === 0)
+  {
+    slopeX = 0;
+    slopeY = 1;
+  }
+  else if(denominator === 0)
+  {
+    slopeX = 1;
+    slopeY = 0;
+  }
+  else
+  {
+    frac = "" + numerator + "/" + denominator
+    stringSlope = simplify(frac);
+    slash = stringSlope.indexOf("/");
+    slopeX = parseInt(stringSlope.substring(0, slash));
+    slopeY = parseInt(stringSlope.substring(slash + 1));
+  }
+  var t;
+  if(slopeX === 0)
+  {
+    t = (endY-startY)/slopeY;
+  }
+  else if(slopeY === 0)
+  {
+    t = (endX-startX)/slopeX;
+  }
+  id = setInterval(frame, t)
+  function frame()
+  {
+    // console.log('end')
+    // console.log(posX)
+    // console.log(endX)
+    var t2 = false;
+    var t3 = false;
+    if(slopeX < 0 && posX < endX)
+      t2 = true
+    if(slopeX > 0 && posX > endX)
+      t2 = true
+    if(slopeY < 0 && posY < endY)
+      t3 = true
+    if(slopeY > 0 && posY > endY)
+      t3 = true
+    if(posX === endX || t2 || t3)
+    {
+      console.log('end')
+      clearInterval(id);
+      // ctx.endPath();
+    }
+    else
+    {
+      ctx.beginPath();
+      ctx.moveTo(posX, posY);
+      var newX = posX+slopeX
+      var newY = posY+slopeY
+      ctx.lineTo(newX, newY);
+      ctx.stroke();
+      posX += slopeX;
+      posY += slopeY;
+    }
+  }
+}
+     function switchSides()
+  {
+    const canvas = document.querySelector('#canvas');
+    if(!canvas.getContext){return;}
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if(document.getElementById("side").innerHTML.includes('1'))
+    {
+      window.onload = drawbackground(drawDots, {{coords}}, 3, "2");     
+    document.getElementById("side").innerHTML = "View 2";
+    }
+    else if(document.getElementById("side").innerHTML.includes('2'))
+      {
+        window.onload = drawbackground(drawDots,{{coords}}, -2, "3"); 
+        
+    document.getElementById("side").innerHTML = "View 3";
+    }
+    else if(document.getElementById("side").innerHTML.includes('3'))
+      {
+        window.onload = drawbackground(drawDots,{{coords}}, -1, "4"); 
+        
+    document.getElementById("side").innerHTML = "View 4";
+    }
+    else if(document.getElementById("side").innerHTML.includes('4'))
+      {
+        window.onload = drawbackground(drawDots,{{coords}}, 4, "5"); 
+        
+    document.getElementById("side").innerHTML = "View 5";
+    }
+    else if(document.getElementById("side").innerHTML.includes('5'))
+      {
+        window.onload = drawbackground(drawDots,{{coords}}, 5, "6"); 
+    document.getElementById("side").innerHTML = "View 6";
+    }
+    else
+      {
+        window.onload = drawbackground(drawDots,{{coords}}, 2, "1"); 
+    document.getElementById("side").innerHTML = "View 1";
+    }
+  }
+    function drawRoute(path)
+{
+  console.log(path);
+  for(let x = 0; x < path.length; x++)
+  {
+    console.log(path[x][0][0]);
+    drawLine(path[x][0][0], path[x][0][1], path[x][1][0], path[x][1][1]);
+  }
+}
+    function properScaling(coordlist)
+  {
+    const canvas = document.querySelector('#canvas');
+    if(!canvas.getContext){return;}
+    const ctx = canvas.getContext('2d');
+    var toRet = {}
+    for(let i = 0; i < coordlist.length; i++)
+    {
+      const value = coordlist[i]
+      var c = []
+      var t = value[0] > 0 && value[0] < canvas.width && value[1] > 0 && value[1] < canvas.height
+      var count = 0
+      while(!(t))
+      {
+        c[0] = (Math.random() * (canvas.width/100))
+        c[1] = (Math.random() * (canvas.height/100))
+        t = c[0] > 0 && c[0] < canvas.width && c[1] > 0 && c[1] < canvas.height
+        count += 1
+      }
+      if(count === 0)
+        c = value
+      toRet[value] = c
+    }
+    return toRet
+  }
+    function drawbackground(onload2, coordlist, scaleval, imgval){
+// const canvas = document.querySelector('#canvas');
+//   if(!canvas.getContext){return;}
+//   const ctx = canvas.getContext('2d');
+//       var img1 = new Image()
+//       img1.onload = function(){
+//                   var destX = canvas.width / 2 - this.width / 2;
+//                   var destY = canvas.height / 2 - this.height / 2;
+//                   ctx.drawImage(this, 0,0,canvas.width, canvas.height); 
+//         };
+//       img1.src = "img/newpluto"+imgval+".png"
+      if(imgval === "1")
+      {
+      document.getElementById("b").style.backgroundImage = 'url("img/newpluto2.png")'
+      }
+      else if(imgval === "2")
+      {
+      document.getElementById("b").style.backgroundImage = 'url("img/newpluto3.png")'
+      }
+      else if(imgval === "3")
+      {
+      document.getElementById("b").style.backgroundImage = 'url("img/newpluto4.png")'
+      }
+      else if(imgval === "4")
+      {
+      document.getElementById("b").style.backgroundImage = 'url("img/newpluto5.png")'
+      }
+      else if(imgval === "5")
+      {
+      document.getElementById("b").style.backgroundImage = 'url("img/newpluto6.png")'
+      }
+      else 
+      {
+      document.getElementById("b").style.backgroundImage = 'url("img/newpluto1.png")'
+      }
+      // console.log(img1.src)
+      // ctx.drawImage(img1, 50,50, canvas.width, canvas.height)
+      
+       var p = properScaling(coordlist)
+      if(!(isNaN({{{finalPath}}})))
+      {
+        var result = '{{{finalPath}}}'
+        var r = result.split(",")
+        var finPath = []
+        for(let i = 0; i < r.length; i += 2)
+          finPath.push([parseFloat(r[i]),parseFloat(r[i+1])])
+        for(let i = 0; i < finPath.length - 1; i++)
+          {
+            console.log(p)
+            console.log(finPath[i])
+          drawLine(scaleval*p[finPath[i]][0], scaleval*p[finPath[i]][1], scaleval*p[finPath[i+1]][0], scaleval*p[finPath[i+1]][1])
+          }
+          var result2 = '{{namePath}}'
+          var r2 = result2.split(", ")
+        var modal = document.getElementById("myModal");
+        modal.style.display = "block";
+        var finalS = "The shortest route to get from " + r2[0] +" to " + r2[r2.length - 1] + " is:<br>"
+        for(let r3 = 0; r3 < r2.length; r3++)          
+        {
+          finalS += r2[r3]+"<br>"
+        }
+        document.getElementById("modaltext").innerHTML = finalS
+      }
+      onload2(p, scaleval, imgval)
+      if(!(isNaN({{{finalPath}}})))
+      {
+        var result = '{{{finalPath}}}'
+        var r = result.split(",")
+        var finPath = []
+        for(let i = 0; i < r.length; i += 2)
+          finPath.push([parseFloat(r[i]),parseFloat(r[i+1])])
+        finNames = []
+        ctx.fillStyle = 'black'
+        ctx.stroke()
+        ctx.fillRect(scaleval*p[finPath[0]][0],scaleval*p[finPath[0]][1],10,10);
+        ctx.fillStyle = 'purple'
+        ctx.stroke()
+        ctx.fillRect(scaleval*p[finPath[finPath.length-1]][0],scaleval*p[finPath[finPath.length-1]][1],10,10);
+      }
+//         ctx.lineWidth = 2;
+//         ctx.font = "30px Arial";
+//    let cameraOffset = { x: window.innerWidth/2, y: window.innerHeight/2 }
+// let cameraZoom = 1
+// let MAX_ZOOM = 5
+// let MIN_ZOOM = 0.1
+// let SCROLL_SENSITIVITY = 0.0005
+//   canvas.width = window.innerWidth
+//     canvas.height = window.innerHeight+500
+    
+//     // Translate to the canvas centre before zooming - so you'll always zoom on what you're looking directly at
+//     ctx.translate( window.innerWidth / 2, window.innerHeight / 2 )
+//     ctx.scale(cameraZoom, cameraZoom)
+//     ctx.translate( -window.innerWidth / 2 + cameraOffset.x, -window.innerHeight / 2 + cameraOffset.y )     
+//     var imagePaper = new Image();
+
+
+//         imagePaper.onload = function(){
+
+
+//             ctx.drawImage(imagePaper,100, 20, 500,500);
+//             onload(coordlist, scaleval, imgval);
+//         };
+
+//       imagePaper.src = "img/newpluto" + imgval+".png";
+}
+    function drawDots(coordList, scaleval, imgval)
+      {
+        const canvas = document.querySelector('#canvas');
+  if(!canvas.getContext){return;}
+  const ctx = canvas.getContext('2d');
+        ctx.lineWidth = 2;
+        ctx.font = "30px Arial";
+   let cameraOffset = { x: window.innerWidth/2, y: window.innerHeight/2 }
+let cameraZoom = 1
+let MAX_ZOOM = 5
+let MIN_ZOOM = 0.1
+let SCROLL_SENSITIVITY = 0.0005
+  canvas.width = window.innerWidth
+    canvas.height = window.innerHeight+500
+    
+    // Translate to the canvas centre before zooming - so you'll always zoom on what you're looking directly at
+    ctx.translate( window.innerWidth / 2, window.innerHeight / 2 )
+    ctx.scale(cameraZoom, cameraZoom)
+    ctx.translate( -window.innerWidth / 2 + cameraOffset.x, -window.innerHeight / 2 + cameraOffset.y )    
+        ctx.fillStyle = 'blue'
+        ctx.stroke()
+        var d = (document.getElementById("input1").innerHTML).split("</option>")
+        for(let i2 = 0; i2 < d.length; i2++)
+        {
+          d[i2] = d[i2].substring(d[i2].indexOf(">") + 1,d[i2].length)
+        }
+        var count = 0
+        for(let i in coordList)
+          {
+            if(count == Object.keys(coordList).length - 1)
+            {
+               ctx.fillStyle = 'yellow'
+              ctx.stroke()
+              rects.push({x: scaleval*coordList[i][0], y: scaleval*coordList[i][1], w: 10, h: 10, s: scaleval, name:d[count]})
+              ctx.fillRect(scaleval*coordList[i][0],scaleval*coordList[i][1],10,10);
+            }
+            else
+            {
+              ctx.fillStyle = 'blue'
+              ctx.stroke()
+              rects.push({x: scaleval*coordList[i][0], y: scaleval*coordList[i][1], w: 10, h: 10, s: scaleval, name:d[count]})
+            ctx.fillRect(scaleval*coordList[i][0],scaleval*coordList[i][1],10,10);
+            }
+            count += 1
+          }
+      }
+  </script>
+</body>
+</html>

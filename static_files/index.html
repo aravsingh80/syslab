@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome</title>
+	<link rel="stylesheet" href="/
+	css/welcome.css">
+</head>
+<body onload = "clearCookies()">
+<video autoplay muted loop id="myVideo">
+  <source src="img/spacevideo.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+<h1 id = "title">Planetary Navigation System</h1>
+<div class = content>
+<h1>
+    Welcome!
+</h1>
+<form action="/instruction" method="GET">
+  <button type = "submit">
+    Go To Page
+  </button>
+</form>
+</div>
+  <script>
+    function clearCookies()
+      {
+        var cookies = document.cookie.split(";");
+    for (var i = 0; i < cookies.length; i++)
+    {   
+        var spcook =  cookies[i].split("=");
+        document.cookie = spcook[0]+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    }
+      }
+  </script>
+</body>
+</html>

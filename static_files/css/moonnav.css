@@ -1,0 +1,314 @@
+#inputform
+{
+  float: left;
+  margin: 0px;
+  min-height: 100%;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  box-shadow: 5px 10px #888888;
+}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+body
+{
+  background-color:black
+/*   background-position: center bottom;  */
+}
+  #canvas
+  {
+    position:relative;
+    z-index: 2;
+  }
+#featureAdder
+{
+  transition-duration: 0.4s;
+  background-color: #00C10C;
+  border: none;
+  color: white;
+padding: 5px 18px;
+  font-size: 16px;
+  margin-left: 40px;
+  margin-right: auto;
+border-radius: 30px; 
+}
+#featureAdder:hover
+{
+  background-color: #19FF27;
+}
+#featureDeleter
+{
+  transition-duration: 0.4s;
+  background-color: #CD0000;
+  border: none;
+  color: white;
+padding: 5px 18px;
+  font-size: 16px;
+  margin-left: 40px;
+  margin-right: auto;
+border-radius: 30px; 
+}
+#featureDeleter:hover
+{
+  background-color: #FF2F2F;
+}
+#firstDiv2
+{
+    position: relative; 
+left: -25px;
+}
+#newFeature
+{
+  z-index: 9999999999 !important;
+}
+#newFeature2
+{
+  z-index: 99999999999 !important;
+}
+#secDiv2
+{
+/*   cursor: move; */
+/*   z-index: 1000; */
+  float: right;
+  margin: 0px;
+  min-height: 100%;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  box-shadow: 5px 10px #888888;
+}
+.dropdown{
+  display: inline-block;
+  position: relative;
+}
+
+.dropdown-content{
+  background-color: white;
+  display: none;
+  position: absolute;
+  width: 100%;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content a {
+  display: block;
+  color: #000000;
+  padding: 10px;
+  text-decoration: none;
+	font-family: "Proxima Nova", sans-serif;
+	
+}
+
+.dropdown-content a:hover {
+  color: #FF0000;
+	
+  /*background-color: #00A4BD;*/
+}
+
+.dropdown:hover .dropdown-content{
+  display:block;
+}
+ul
+{
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1.1em;
+  text-align: center;
+  vertical-align: top;
+/*   border-bottom: solid; */
+/*   border: solid;
+  border-width: 50%; */
+/*   width: 1000px; */
+}
+
+#error
+{
+  font-family: Helvetica;
+  color: red;
+  font-size: 10px;
+  font-weight: normal;
+  text-align: center;
+}
+#featurepick
+{
+  font-family: Helvetica;
+    color: #500066;
+  font-size:25px;
+}
+#title
+{
+  display: block;
+  border: 3px solid black;
+  border-radius: 35px;
+/*   font-family: 'Allan'; */
+/*   position: fixed; */
+/*   top: 280px; */
+  text-align: center;
+/*   margin-top: auto; */
+/*   margin-bottom: auto; */
+/*   background: rgba(0, 0, 0, 0.5); */
+  color: black;
+  width: 25%;
+  margin-left: auto;
+  margin-right: auto;
+/*   padding: 20px; */
+  font-size: 75px;
+  transition: 0.5s;
+/*   -webkit-animation: fadeinout 4s linear forwards;
+    animation: fadeinout 4s linear forwards;
+    opacity: 0; */
+}
+#title:hover{border:1px solid black;}
+#coords
+{
+  display: block;
+  border: 3px solid black;
+  border-radius: 35px;
+  background-color: white;
+/*   font-family: 'Allan'; */
+/*   position: fixed; */
+/*   top: 280px; */
+  text-align: center;
+/*   margin-top: auto; */
+/*   margin-bottom: auto; */
+/*   background: rgba(0, 0, 0, 0.5); */
+  color: black;
+  width: 25%;
+  margin-left: auto;
+  margin-right: auto;
+/*   padding: 20px; */
+  font-size: 20px;
+  transition: 0.5s;
+/*   -webkit-animation: fadeinout 4s linear forwards;
+    animation: fadeinout 4s linear forwards;
+    opacity: 0; */
+}
+#coords:hover{border:1px solid black;}
+#subButton
+{
+   transition-duration: 0.4s;
+  background-color: purple;
+  border: none;
+  color: white;
+padding: 5px 18px;
+  font-size: 16px;
+  margin-left: 40px;
+  margin-right: auto;
+border-radius: 30px; 
+}
+#subButton:hover
+{
+   background-color: black; 
+  color: white;
+}
+#side
+{
+  background-color: black;border-radius: 16px;color: white;transition: 0.6s;
+         border: 2px solid #e4e4e7;
+  /*color: white;*/
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+	cursor: pointer;
+}
+#side:hover
+{
+  box-shadow: 2px 5px grey;
+}
+#firstDiv
+{
+  position: absolute;
+  z-index: 45;
+}
+#secDiv
+{
+  cursor: move;
+  z-index: 46;
+}
+/* input[type=number] {
+  float: left;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+} */
+ul {
+	/*font-family: 'Lucida Bright', LucidaBright*/
+	width = 10;
+	padding = 5px;
+	font-family: 'Roboto', sans-serif;
+	
+	
+}
+a, a:hover, a:focus, a:active {
+ text-decoration: none;
+ color: inherit;
+}
+.button1 {background-color: white;border-radius: 16px;color: black;transition: 0.6s;
+         border: 2px solid #e4e4e7;
+  /*color: white;*/
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+	cursor: pointer;}
+.button2 {background-color: black;border-radius: 16px; color: white;transition: 0.6s;
+         border: 2px solid #e4e4e7;
+  /*color: white;*/
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+	cursor: pointer;
+         margin-bottom: 12px;}
+.button2:hover {box-shadow: 2px 5px grey;}
+.button1:hover {box-shadow: 2px 5px grey;}
+/* .hero
+{
+  margin-top:10px;
+} */
